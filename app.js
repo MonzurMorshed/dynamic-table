@@ -1,5 +1,6 @@
 const express = require('express');
 const router = require('./src/routes/api');
+// const router = express.Router();
 
 const app = new express();
 const bodyParser = require('body-parser');
@@ -27,7 +28,7 @@ app.use(xss());
 app.use(hpp());
 
 // Body Parser Implement
-app.use(Parser.json());
+app.use(bodyParser.json());
 
 // Request rate limit
 const limiter = rateLimit({
@@ -39,13 +40,13 @@ app.use(limiter);
 
 // MongoDB Database connection
 let URI = 'mongodb+srv://monzurmorshedcse:P6l062RTrsfXTr22@cluster0.wm9uy.mongodb.net/sample_restaurants';
-mongoose.connect(URI,(error) => {
-    console.log('Connection success');
-    console.log(error);
-});
+mongoose.connect(URI)
+    .then(() => console.log('MongoDB connected'))
+    .catch(err => console.log('MongoDB connection error:', err));;
 
 // Routing implement
 app.use('/api/v1',router);
+// app.use('/',router);
 
 // Frontend routing
 app.get('*', function(req,res) {
