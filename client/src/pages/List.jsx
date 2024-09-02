@@ -20,6 +20,21 @@ const List = () => {
                                             </div>
                                         </div>
                                     </div>
+                                    
+                                    <div className="row">
+                                        <div className="col-12">
+                                            <div className="table-responsive data-table">
+                                                <table className="table">
+                                                    <thead className="sticky-top bg-white">
+                                                        <th>Name</th>
+                                                        <th>Cuisine</th>
+                                                        <th>Borough</th>
+                                                        <th>Grade</th>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -29,3 +44,5 @@ const List = () => {
         </>
     )
 }
+
+export default List;

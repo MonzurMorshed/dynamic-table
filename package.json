@@ -18,5 +18,18 @@
   "bugs": {
     "url": "https://github.com/MonzurMorshed/dynamic-table/issues"
   },
-  "homepage": "https://github.com/MonzurMorshed/dynamic-table#readme"
+  "homepage": "https://github.com/MonzurMorshed/dynamic-table#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^7.4.0",
+    "helmet": "^7.1.0",
+    "hpp": "^0.2.3",
+    "mongoose": "^8.6.0",
+    "nodemon": "^3.1.4",
+    "path": "^0.12.7",
+    "xss-clean": "^0.1.4"
+  }
 }
