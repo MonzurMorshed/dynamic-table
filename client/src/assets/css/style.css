@@ -1,15 +1,11 @@
-@import '../css/animate.min.css';
-@import '../css//bootstrap.css';
-@import '../css/data-table.css';
-@import '../css/progress.css';
+@import './/bootstrap.css';
+@import './data-table.css';
+@import './animate.min.css';
+@import './progress.css';
 
-@font-face {
-    font-family: 'Roboto';
-    src: url('../fonts/Roboto-Black.ttf') format('truetype');
-    font-weight: 900;
-    font-style: normal;
-  }
-  
+html {
+    font-family: 'Poppins', sans-serif !important;
+}
 
 .d-none {
     display: none;
@@ -62,4 +58,14 @@ a:hover {
 
 .swal2-styled:focus {
     box-shadow: none !important;
+}
+
+.list-heading{
+    color: #cb0c9f;
+}
+
+.list-table thead {
+    background: #cb0c9f;
+    color: #fff;
+    text-align: center;
 }

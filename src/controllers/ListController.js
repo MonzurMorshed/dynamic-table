@@ -1,8 +1,9 @@
 const ListModel = require('../models/ListModel');
+const _ = require('lodash');
 
-exports.ItemList = async (req,res) => {
+exports.ItemList = _.debounce(async (req,res) => {
 
-    // try {
+    try {
         let pageNo = Number(req.params.pageNo);
         let perPage = Number(req.params.perPage);
         let searchValue = req.params.searchKeyword;
@@ -42,11 +43,11 @@ exports.ItemList = async (req,res) => {
             status: 'success',data
         })
 
-    // } 
-    // catch(e) {
-    //     res.status(200).json({
-    //         status: 'fail',error: e
-    //     })
-    // }
+    } 
+    catch(e) {
+        res.status(200).json({
+            status: 'fail',error: e
+        })
+    }
 
-}
+},1000);
