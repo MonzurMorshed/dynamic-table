@@ -1,6 +1,8 @@
 import { SetListItem, SetTotal } from '../redux/state-slice/listSlice';
 import { HideLoader, ShowLoader } from '../redux/state-slice/settingsSlice';
-import store from '../redux/store/store'
+import store from '../redux/store/store';
+import { ErrorToast } from '../helpers/formHelper';
+import axios from 'axios';
 
 const BaseURL = "http://localhost:5001/api/v1"
 
@@ -27,7 +29,6 @@ export async function GetList(pageNo, perPage, searchKeyword) {
         }
     } catch (e) {
         ErrorToast("Something went wrong")
-        console.log('Error : ',e);
         store.dispatch(HideLoader());
     }
 

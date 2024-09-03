@@ -2,10 +2,10 @@ import cogoToast from "cogo-toast"
 
 class FromHelper {
     ErrorToast(msg) {
-        cogoToast.error(msg,{position: "bottom-center"});
+        cogoToast.error(msg,{position: "top-right"});
     }
     SuccessToast(msg) {
-        cogoToast.success(msg,{position: "bottom-center"});
+        cogoToast.success(msg,{position: "top-right"});
     }
 }
 
