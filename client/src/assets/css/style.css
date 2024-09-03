@@ -1,4 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&amp;display=swap');
+@import '../css/animate.min.css';
+@import '../css//bootstrap.css';
+@import '../css/data-table.css';
+@import '../css/progress.css';
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+  }
+  
 
 .d-none {
     display: none;
@@ -7,7 +18,7 @@
 body {
     background: #F9F8F8;
     font-size: 14px;
-    font-family: 'Poppins', sans-serif !important;
+    font-family: 'Roboto'  !important;
 }
 
 h1,
@@ -19,7 +30,7 @@ h6,
 button,
 input,
 textarea {
-    font-family: 'Poppins', sans-serif !important;
+    font-family: 'Roboto'  !important;
 }
 
 .center-screen {
@@ -33,14 +44,14 @@ textarea {
 
 p {
     font-size: 14px;
-    font-family: 'Poppins', sans-serif !important;
+    font-family: 'Roboto'  !important;
 }
 
 a {
     color: inherit;
     text-decoration: none;
     cursor: pointer;
-    font-family: 'Poppins', sans-serif !important;
+    font-family: 'Roboto'  !important;
 }
 
 a:hover {
@@ -52,6 +63,3 @@ a:hover {
 .swal2-styled:focus {
     box-shadow: none !important;
 }
-
-@import "data-table.css";
-@import "progress.css";

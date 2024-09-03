@@ -39,7 +39,7 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // MongoDB Database connection
-let URI = 'mongodb+srv://monzurmorshedcse:P6l062RTrsfXTr22@cluster0.wm9uy.mongodb.net/sample_restaurants';
+let URI = 'mongodb+srv://monzurmorshedcse:P6l062RTrsfXTr22@cluster0.wm9uy.mongodb.net/sample_restaurants?retryWrites=true&w=majority';
 mongoose.connect(URI)
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.log('MongoDB connection error:', err));;
