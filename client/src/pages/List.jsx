@@ -27,7 +27,6 @@ const List = () => {
     const searchKeywordOnChange = (event) => {
 
         setSearchKeyword(event.target.value);
-        console.log(searchKeyword);
         if((event.target.value)?.length === 0){
             setSearchKeyword("0");
             GetList(1,perPage,searchKeyword);
