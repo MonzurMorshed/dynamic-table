@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { GetList } from "../APIRequest/APIRequest";
 import { useSelector } from 'react-redux';
 import ReactPaginate from 'react-paginate';
+import { TbDirection, TbSearch } from "react-icons/tb";
+import { MdOutlineCloudDownload } from "react-icons/md";
+import { usePDF } from "react-to-pdf";
 
 const List = () => {
 
@@ -42,9 +45,10 @@ const List = () => {
 
     const handleRequestSort = (key) => {
         sortVal == 1 ? setSortVal(-1) : setSortVal(1);
-        let data = GetList(1, perPage, searchKeyword,key,sortVal);
-        console.log(1,', ',perPage,',', searchKeyword,',', key,',', sortVal,'Handle sort request method. ',data);
+        GetList(1, perPage, searchKeyword,key,sortVal);
     };
+
+    const { toPDF, targetRef } = usePDF({filename: 'data.pdf'});
 
     return (
         <>
@@ -54,12 +58,18 @@ const List = () => {
                         <div className="card ">
                             <div className="card-body">
                                 <div className="container-fluid ">
-                                    <div className="row my-2">
+                                    <div className="row my-2 justify-content-between">
                                         <div className="col-md-4 col-sm-4 d-flex items-center mb-2">
                                             <img className="w-15 sm-w-5 h-5" src="./src/assets/images/database-table.webp" alt="data-table" />
                                             <h4 className="list-heading mx-4">Data List</h4>
                                         </div>
-                                        <div className="col-md-3 col-sm-3  mb-2">
+                                        <div className="col-4">
+                                            <button onClick={() => toPDF()} className="btn btn-sm btn-success float-end"><MdOutlineCloudDownload className="fs-2 fw-600 mr-2"/></button>
+                                        </div>
+                                    </div>
+
+                                    <div className="row">
+                                        <div className="col-md-2 col-sm-2  mb-2 float-end">
                                             <select onChange={perPageChange} className="form-control p-1 form-control-sm">
                                                 <option value="10">10 per page</option>
                                                 <option value="20">20 per page</option>
@@ -70,25 +80,33 @@ const List = () => {
                                                 <option value="70">70 per page</option>
                                             </select>
                                         </div>
-                                        <div className="col-md-5  col-sm-5 mb-2">
+                                        <div className="col-md-5  col-sm-5 mb-2 float-end">
                                             <div className="input-group mb-3">
                                                 <input onChange={searchKeywordOnChange} type="text" className="form-control form-control-sm" placeholder="Search.." />
-                                                <button onClick={searchData} className="btn search-btn btn-sm mb-0">Search</button>
+                                                <button onClick={searchData} className="btn search-btn btn-sm mb-0"><TbSearch className="fw-600 mr-2"/></button>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div className="row">
-                                        <div className="col-12">
+                                        <div className="col-12" ref={targetRef}>
                                             <div className="table-responsive data-table">
-                                                <table className="table list-table">
+                                                <table className="table table-striped table-hover list-table">
                                                     <thead className="sticky-top">
                                                         <tr>
                                                             <th>No. </th>
-                                                            <th onClick={() => handleRequestSort('name')}>Name</th>
-                                                            <th onClick={() => handleRequestSort('address')}>Address</th>
-                                                            <th onClick={() => handleRequestSort('cuisine')}>Cuisine</th>
-                                                            <th onClick={() => handleRequestSort('borough')}>Borough</th>
+                                                            <th className="cursor-pointer" onClick={() => handleRequestSort('name')}>
+                                                                Name <TbDirection className="fs-3" />
+                                                            </th>
+                                                            <th className="cursor-pointer" onClick={() => handleRequestSort('address')}>
+                                                                Address <TbDirection className="fs-3" />
+                                                            </th>
+                                                            <th className="cursor-pointer" onClick={() => handleRequestSort('cuisine')}>
+                                                                Cuisine <TbDirection className="fs-3" />
+                                                            </th>
+                                                            <th className="cursor-pointer" onClick={() => handleRequestSort('borough')}>
+                                                                Borough <TbDirection className="fs-3" />
+                                                            </th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
