@@ -5,22 +5,24 @@ import ReactPaginate from 'react-paginate';
 
 const List = () => {
 
-    let [searchKeyword,setSearchKeyword] = useState("0");
-    let [perPage,setPerPage] = useState(10);
+    const [searchKeyword,setSearchKeyword] = useState("0");
+    const [perPage,setPerPage] = useState(10);
+    const [pageNo,setPageNo] = useState(1);
 
     useEffect(() => {
         GetList(1,perPage,searchKeyword);
     },[]);
 
-    let itemList = useSelector((state) => (state.list.ListItem));
-    let itemCount = useSelector((state) => (state.list.Total));
+    const itemList = useSelector((state) => (state.list.ListItem));
+    const itemCount = useSelector((state) => (state.list.Total));
 
     const handlePageClick = (event) => {
-        let pageNo = event.selected;
+        setPageNo(event.selected);
         GetList(pageNo+1,perPage,searchKeyword);
     }
 
     const perPageChange = (event) => {
+        setPerPage(event.target.value);
         GetList(1,parseInt(event.target.value),searchKeyword);
     }
 
@@ -30,9 +32,11 @@ const List = () => {
         if((event.target.value)?.length === 0){
             setSearchKeyword("0");
             GetList(1,perPage,searchKeyword);
-        } else {
-            GetList(1,perPage,searchKeyword);
         }
+    }
+
+    const searchData = () => {
+        GetList(1,perPage,searchKeyword);
     }
 
     return (
@@ -44,13 +48,12 @@ const List = () => {
                             <div className="card-body">
                                 <div className="container-fluid ">
                                     <div className="row my-2">
-                                        <div className="col-6 d-flex items-center">
-                                            <img className="w-10" src="./src/assets/images/database-table.webp" alt="data-table" />
+                                        <div className="col-md-4 col-sm-4 d-flex items-center mb-2">
+                                            <img className="w-10 sm-w-10" src="./src/assets/images/database-table.webp" alt="data-table" />
                                             <h4 className="list-heading mx-4">Data List</h4>
                                         </div>
-                                        <div className="col-2">
+                                        <div className="col-md-3 col-sm-3  mb-2">
                                             <select onChange={perPageChange} className="form-control p-1 form-control-sm">
-                                                <option value="5">5 per page</option>
                                                 <option value="10">10 per page</option>
                                                 <option value="20">20 per page</option>
                                                 <option value="30">30 per page</option>
@@ -58,15 +61,12 @@ const List = () => {
                                                 <option value="50">50 per page</option>
                                                 <option value="60">60 per page</option>
                                                 <option value="70">70 per page</option>
-                                                <option value="15">80 per page</option>
-                                                <option value="15">90 per page</option>
-                                                <option value="15">100 per page</option>
                                             </select>
                                         </div>
-                                        <div className="col-4">
+                                        <div className="col-md-5  col-sm-5 mb-2">
                                             <div className="input-group mb-3">
                                                 <input onChange={searchKeywordOnChange} type="text" className="form-control form-control-sm" placeholder="Search.."/>
-                                                <button className="btn btn-outline-primary btn-sm mb-0">Search</button>
+                                                <button onClick={searchData} className="btn search-btn btn-sm mb-0">Search</button>
                                             </div>
                                         </div>
                                     </div>
@@ -77,7 +77,7 @@ const List = () => {
                                                 <table className="table list-table">
                                                     <thead className="sticky-top">
                                                         <tr>
-                                                            <th>Id</th>
+                                                            <th>No.</th>
                                                             <th>Name</th>
                                                             <th>Address</th>
                                                             <th>Cuisine</th>
@@ -89,11 +89,11 @@ const List = () => {
                                                         itemList?.map((item,index) => {
                                                             return (
                                                                 <tr key={index}>
-                                                                    <th className="text-center">{index+1}</th>
-                                                                    <th>{item?.name}</th>
-                                                                    <th>{`House : ${item?.address?.building}, Street : ${item?.address?.street}`}</th>
-                                                                    <th>{item?.cuisine}</th>
-                                                                    <th>{item?.borough}</th>
+                                                                    <td className="text-center">{parseInt(pageNo*perPage)+parseInt(index+1)}</td>
+                                                                    <td>{item?.name}</td>
+                                                                    <td>{`House : ${item?.address?.building}, Street : ${item?.address?.street}`}</td>
+                                                                    <td>{item?.cuisine}</td>
+                                                                    <td>{item?.borough}</td>
                                                                 </tr>
                                                             )
                                                         })
@@ -102,7 +102,7 @@ const List = () => {
                                                 </table>
                                             </div>
                                         </div>
-                                        <div className="col-12 mt-5">
+                                        <div className="col-12 mt-5 paginationdata">
                                             <nav aria-label="Page Navigation">
                                             <ReactPaginate
                                                 breakLabel="......"

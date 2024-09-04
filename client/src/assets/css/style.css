@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&amp;display=swap');
-
 @import './/bootstrap.css';
 @import './data-table.css';
 @import './animate.min.css';
@@ -16,7 +14,7 @@ html {
 body {
     background: #F9F8F8;
     font-size: 14px;
-    font-family: 'Poppins', sans-serif !important;
+    font-family: 'poppins', sans-serif !important;
 }
 
 h1,
@@ -28,7 +26,7 @@ h6,
 button,
 input,
 textarea {
-    font-family: 'Poppins', sans-serif !important;
+    font-family: 'poppins', sans-serif !important;
 }
 
 .center-screen {
@@ -42,14 +40,14 @@ textarea {
 
 p {
     font-size: 14px;
-    font-family: 'Poppins', sans-serif !important;
+    font-family: 'poppins', sans-serif !important
 }
 
 a {
     color: inherit;
     text-decoration: none;
     cursor: pointer;
-    font-family: 'Poppins', sans-serif !important;
+    font-family: 'poppins', sans-serif !important
 }
 
 a:hover {
@@ -63,11 +61,22 @@ a:hover {
 }
 
 .list-heading{
-    color: #cb0c9f;
+    color: #1a5276;
 }
 
 .list-table thead {
-    background: #cb0c9f;
+    background: #1a5276;
     color: #fff;
     text-align: center;
+}
+
+.search-btn {
+    background-color: #fff;
+    color: #1a5276;
+    border: 1px solid #1a5276 !important;
+}
+
+.search-btn:hover {
+    background-color: #1a5276;
+    color: #fff;
 }
