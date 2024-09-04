@@ -6,9 +6,9 @@ import axios from 'axios';
 
 const BaseURL = "http://localhost:5001/api/v1"
 
-export async function GetList(pageNo, perPage, searchKeyword) {
+export async function GetList(pageNo, perPage, searchKeyword, key, sortVal) {
     
-    let URL = `${BaseURL}/List/${pageNo}/${perPage}/${searchKeyword}`;
+    let URL = `${BaseURL}/List/${pageNo}/${perPage}/${searchKeyword}/${key}/${sortVal}`;
 
     store.dispatch(ShowLoader());
 

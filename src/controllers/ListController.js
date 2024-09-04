@@ -1,12 +1,13 @@
 const ListModel = require('../models/ListModel');
-const _ = require('lodash');
 
-exports.ItemList = (async (req,res) => {
+exports.ItemList = async (req,res) => {
 
-    // try {
+    try {
         let pageNo = Number(req.params.pageNo);
         let perPage = Number(req.params.perPage);
         let searchValue = req.params.searchKeyword;
+        let sortVal = Number(req.params.sortVal);
+        let key = req.params.key;
         let skipRow = (pageNo - 1) * perPage;
 
         let data;
@@ -24,30 +25,43 @@ exports.ItemList = (async (req,res) => {
                 }
             ]};
 
-            data = await ListModel.aggregate([{
-                $facet: {
-                    Total: [{$match: SearchQuery},{$count: "count"}],
-                    Rows: [{$match: SearchQuery},{$skip: skipRow}, {$limit: perPage}]
+            data = await ListModel.aggregate([
+                {
+                    $facet: {
+                        Total: [{$match: SearchQuery},{$count: "count"}],
+                        Rows: [
+                            {$match: SearchQuery},
+                            {$sort: { [key]: sortVal}},
+                            {$skip: skipRow}, 
+                            {$limit: perPage}
+                        ]
+                    }
                 }
-            }]);
+            ]);
+
         } else{
             data = await ListModel.aggregate([{
-                $facet: {
-                    Total: [{$count: "count"}],
-                    Rows: [{$skip: skipRow}, {$limit: perPage}]
+                    $facet: {
+                        Total: [{$count: "count"}],
+                        Rows: [
+                            {$sort: { [key]: sortVal}},
+                            {$skip: skipRow},
+                            {$limit: perPage}
+                        ]
+                    }
                 }
-            }]);
+            ]);
         }
 
         res.status(200).json({
             status: 'success',data
         })
 
-    // } 
-    // catch(e) {
-    //     res.status(200).json({
-    //         status: 'fail',error: e
-    //     })
-    // }
+    } 
+    catch(e) {
+        res.status(200).json({
+            status: 'fail',error: e
+        })
+    }
 
 }
